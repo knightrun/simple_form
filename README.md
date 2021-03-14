@@ -1,5 +1,8 @@
 # Simple Form
 
+* NuxtJs
+* TSX (JSX for TypeScript)
+
 ```bash
 # install dependencies
 $ yarn or yarn install
