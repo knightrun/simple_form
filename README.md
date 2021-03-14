@@ -1,4 +1,4 @@
-# Join Us
+# Simple Form
 
 ```bash
 # install dependencies
