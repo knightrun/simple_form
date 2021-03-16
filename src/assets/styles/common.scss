@@ -32,3 +32,27 @@
         }
     }
 }
+
+.custom-check{
+    position: relative;
+    padding-left:25px;
+
+    input[type=checkbox]{
+        position: absolute;
+        left:0;
+        top:50%;
+        transform: translateY(-50%);
+        width: 16px;
+        height: 16px;
+    }
+
+
+    &.slot{
+        position: relative;
+    }
+
+    *{
+        font-size: 14px;
+        color: #333;
+    }
+}
