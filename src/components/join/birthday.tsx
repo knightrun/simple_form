@@ -66,16 +66,16 @@ export default class Birthday extends Vue {
               v-model={this.year}
           />
           <custom-select
-              id="nationNo"
-              ref="nationNo"
+              id="month"
+              ref="month"
               optionTitle="선택"
               options={this.monthList}
               onInput={this.onInput}
               v-model={this.month}
           />
           <custom-select
-              id="nationNo"
-              ref="nationNo"
+              id="dat"
+              ref="day"
               optionTitle="선택"
               options={this.dayList}
               onInput={this.onInput}
