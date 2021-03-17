@@ -1,5 +1,5 @@
 import {CreateElement, VNode} from 'vue'
-import {Component, Prop, Vue} from 'nuxt-property-decorator'
+import {Component, Vue} from 'nuxt-property-decorator'
 
 //json
 import phoneData from '@/static/json/phoneData.json'

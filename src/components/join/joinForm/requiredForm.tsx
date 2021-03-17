@@ -1,10 +1,10 @@
 import {CreateElement, VNode} from 'vue'
-import {Component, Prop, Vue} from 'nuxt-property-decorator'
+import {Component, Vue} from 'nuxt-property-decorator'
 
 //components
-import PhoneNumberCertification from '@/components/join/phoneNumberCertification'
-import Agreement from '@/components/join/agreement'
-import Birthday from '@/components/join/birthday'
+import PhoneNumberCertification from '@/components/join/joinForm/phoneNumberCertification'
+import Agreement from '@/components/join/joinForm/agreement'
+import Birthday from '@/components/join/joinForm/birthday'
 
 //type
 import {IRadioList} from '@/typings/state'
@@ -29,6 +29,10 @@ export default class RequiredForm extends Vue {
 
   onCert(val: boolean) {
     this.formData.certYn = val
+  }
+
+  back() {
+    this.$router.push('/join/agree')
   }
 
   getData() {
@@ -84,7 +88,8 @@ export default class RequiredForm extends Vue {
           <PhoneNumberCertification v-model={this.formData.phoneNo} onCert={this.onCert}/>
           <Agreement v-model={this.formData.agree}/>
           <div class="btn-wrap">
-            <button type="button" class="btn btn-join" onClick={this.getData}>가입하기</button>
+            <button type="button" class="btn btn-back" onClick={this.back}>취소</button>
+            <button type="button" class="btn btn-join" onClick={this.getData}>확인</button>
           </div>
         </div>
     )
