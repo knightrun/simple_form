@@ -1,5 +1,6 @@
 import {CreateElement, VNode} from 'vue'
 import {Component, Vue} from 'nuxt-property-decorator'
+import {ValidationProvider, ValidationObserver} from 'vee-validate';
 
 //components
 import PhoneNumberCertification from '@/components/join/joinForm/phoneNumberCertification'
@@ -12,6 +13,10 @@ import {IJoinFormData} from '@/typings/state'
 
 @Component
 export default class RequiredForm extends Vue {
+  $refs!: Vue['$refs'] & {
+    observer: HTMLSpanElement
+  }
+
   private formData: IJoinFormData = {
     userId: '',
     userPassword: '',
@@ -27,6 +32,9 @@ export default class RequiredForm extends Vue {
     {label: '여자', value: 'female'},
   ]
 
+  private value: string = ''
+  private value2: string = ''
+
   onCert(val: boolean) {
     this.formData.certYn = val
   }
@@ -35,45 +43,55 @@ export default class RequiredForm extends Vue {
     this.$router.push('/join/agree')
   }
 
-  getData() {
-    if (this.formData.userId === '') {
-      alert('아이디를 입력해 주세요.')
-      return false
-    } else if (this.formData.userPassword === '') {
-      alert('패스워드를 입력해 주세요')
-      return false
-    } else if (!this.formData.certYn) {
-      alert('휴대폰 본인인증을 해 주세요.')
-      return false
-    } else if (!this.formData.agree) {
-      alert('약관 내용에 동의해 주세요.')
-      return false
-    }
-
-    this.$emit('sendData', this.formData)
+  async getData() {
+    // const valid = await this.$refs.observer.validate()
+    // console.log(this.$refs.observer.children)
+    console.log(this.$refs.observer)
+    // if (this.formData.userId === '') {
+    //   alert('아이디를 입력해 주세요.')
+    //   return false
+    // } else if (this.formData.userPassword === '') {
+    //   alert('패스워드를 입력해 주세요')
+    //   return false
+    // } else if (!this.formData.certYn) {
+    //   alert('휴대폰 본인인증을 해 주세요.')
+    //   return false
+    // } else if (!this.formData.agree) {
+    //   alert('약관 내용에 동의해 주세요.')
+    //   return false
+    // }
+    //
+    // this.$emit('sendData', this.formData)
   }
 
   render(h: CreateElement): VNode {
     return (
         <div class="form_wrap">
           <div class="text_wrap">
-            <text-input
-                id="userId"
-                ref="userId"
-                class="row"
-                label="아이디*"
-                placeholder="아이디를 입력하세요"
-                v-model={this.formData.userId}
-            />
-            <text-input
-                id="userPassword"
-                ref="userPassword"
-                class="row"
-                type="password"
-                label="비밀번호*"
-                placeholder="비밀번호를 입력하세요"
-                v-model={this.formData.userPassword}
-            />
+            <validation-observer name="observer" ref="observer">
+              <validation-provider rules="required" name="userId">
+                <text-input
+                    id="userId"
+                    ref="userId"
+                    wrapClass="row"
+                    label="아이디*"
+                    placeholder="아이디를 입력하세요"
+                    v-model={this.formData.userId}
+                />
+              </validation-provider>
+
+              <validation-provider rules="required" name="userPassword">
+                <text-input
+                    id="userPassword"
+                    ref="userPassword"
+                    wrapClass="row"
+                    type="password"
+                    label="비밀번호*"
+                    placeholder="비밀번호를 입력하세요"
+                    v-model={this.formData.userPassword}
+                />
+              </validation-provider>
+            </validation-observer>
           </div>
           <div class="gender_wrap">
             <span>성별*</span>

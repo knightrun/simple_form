@@ -19,6 +19,9 @@ export default class TextInput extends Vue {
   @Prop({type: String, required: true})
   readonly id: string
 
+  @Prop(String)
+  readonly wrapClass: string
+
   @Prop({type: Object, default: () => ({input: '', label: ''})})
   readonly className: { input: string, label: string }
 
@@ -73,35 +76,35 @@ export default class TextInput extends Vue {
     return (
         h(
             this.tag,
-            {},
+            {
+              class: this.wrapClass
+            },
             [
-              this.label ?
-                  <label
-                      for={this.id}
-                      class={this.className.label}
-                  >
-                    {this.label}
-                  </label>
-                  : null,
-              <input
-                  type={this.type}
-                  id={this.id}
-                  class={this.className.input}
-                  placeholder={this.placeholder}
-                  maxlength={this.maxLength}
-                  disabled={this.disabled}
-                  readonly={this.readonly}
-                  autocomplete={this.autocomplete}
-                  value={this.value}
-                  onInput={this.onInput}
-                  onKeypress={this.onKeyPress}
-                  onKeyup={this.onKeyUp}
-                  onKeydown={this.onKeyDown}
-                  onFocus={this.onFocus}
-                  onBlur={this.onBlur}
-                  onClick={this.onClick}
-                  ref="input"
-              />
+                this.label && <label
+                    for={this.id}
+                    class={this.className.label}
+                >
+                  {this.label}
+                </label>,
+                <input
+                    type={this.type}
+                    id={this.id}
+                    class={this.className.input}
+                    placeholder={this.placeholder}
+                    maxlength={this.maxLength}
+                    disabled={this.disabled}
+                    readonly={this.readonly}
+                    autocomplete={this.autocomplete}
+                    value={this.value}
+                    onInput={this.onInput}
+                    onKeypress={this.onKeyPress}
+                    onKeyup={this.onKeyUp}
+                    onKeydown={this.onKeyDown}
+                    onFocus={this.onFocus}
+                    onBlur={this.onBlur}
+                    onClick={this.onClick}
+                    ref="input"
+                />
             ]
         )
     )

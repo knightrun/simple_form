@@ -22,6 +22,7 @@ export default {
   ],
   plugins: [
     { src: '~/plugins/commonComponents', ssr: true },
+    { src: '~/plugins/veeValidator', ssr: true },
   ],
   components: true,
   buildModules: [
@@ -33,6 +34,9 @@ export default {
   ],
   axios: {},
   build: {
+    transpile: [
+      "vee-validate/dist/rules"
+    ],
   },
   styleResources: {
     sass: [

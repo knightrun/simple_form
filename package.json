@@ -12,7 +12,8 @@
   "dependencies": {
     "@nuxt/typescript-runtime": "^0.4.10",
     "@nuxtjs/axios": "^5.11.0",
-    "nuxt": "^2.13.0"
+    "nuxt": "^2.13.0",
+    "vee-validate": "^3.4.5"
   },
   "devDependencies": {
     "@nuxt/typescript-build": "^1.0.3",
