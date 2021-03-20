@@ -2,8 +2,8 @@ import { Vue } from 'nuxt-property-decorator'
 
 // import component
 import Fragment from '@/components/common/fragment'
-import ValidationObserverWrap from '@/components/common/validation/ValidationObserverWrap'
-import ValidationProviderWrap from '@/components/common/validation/validationProviderWrap'
+import ValidationWrap from '@/components/common/validation/validationWrap'
+import ValidationContent from '@/components/common/validation/validationContent'
 import TextInput from '@/components/common/form/textInput'
 import RadioInput from '@/components/common/form/radioInput'
 import CheckBoxInput from '@/components/common/form/checkBoxInput'
@@ -13,8 +13,8 @@ import CheckBoxGroup, { CheckBoxGroupItem, CheckBoxAll } from '@/components/comm
 
 // components
 Vue.component('fragment', Fragment)
-Vue.component('validation-observer', ValidationObserverWrap)
-Vue.component('validation-provider', ValidationProviderWrap)
+Vue.component('validation-wrap', ValidationWrap)
+Vue.component('validation-content', ValidationContent)
 Vue.component('text-input', TextInput)
 Vue.component('radio-input', RadioInput)
 Vue.component('checkbox-input', CheckBoxInput)

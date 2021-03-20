@@ -1,6 +1,6 @@
 import {CreateElement, VNode} from 'vue'
 import {Component, Vue} from 'nuxt-property-decorator'
-import {ValidationProvider, ValidationObserver} from 'vee-validate';
+import {ValidationObserver} from 'vee-validate';
 
 //components
 import PhoneNumberCertification from '@/components/join/joinForm/phoneNumberCertification'
@@ -14,7 +14,7 @@ import {IJoinFormData} from '@/typings/state'
 @Component
 export default class RequiredForm extends Vue {
   $refs!: Vue['$refs'] & {
-    observer: HTMLSpanElement
+    validationWrap: InstanceType<typeof ValidationObserver>
   }
 
   private formData: IJoinFormData = {
@@ -44,9 +44,7 @@ export default class RequiredForm extends Vue {
   }
 
   async getData() {
-    // const valid = await this.$refs.observer.validate()
-    // console.log(this.$refs.observer.children)
-    console.log(this.$refs.observer)
+    const valid = await this.$refs.validationWrap.onSubmit()
     // if (this.formData.userId === '') {
     //   alert('아이디를 입력해 주세요.')
     //   return false
@@ -67,9 +65,9 @@ export default class RequiredForm extends Vue {
   render(h: CreateElement): VNode {
     return (
         <div class="form_wrap">
-          <div class="text_wrap">
-            <validation-observer name="observer" ref="observer">
-              <validation-provider rules="required" name="userId">
+          <validation-wrap name="observer" ref="validationWrap">
+            <div class="text_wrap">
+              <validation-content rules="required" name="userId">
                 <text-input
                     id="userId"
                     ref="userId"
@@ -78,9 +76,8 @@ export default class RequiredForm extends Vue {
                     placeholder="아이디를 입력하세요"
                     v-model={this.formData.userId}
                 />
-              </validation-provider>
-
-              <validation-provider rules="required" name="userPassword">
+              </validation-content>
+              <validation-content rules="required" name="userPassword">
                 <text-input
                     id="userPassword"
                     ref="userPassword"
@@ -90,25 +87,25 @@ export default class RequiredForm extends Vue {
                     placeholder="비밀번호를 입력하세요"
                     v-model={this.formData.userPassword}
                 />
-              </validation-provider>
-            </validation-observer>
-          </div>
-          <div class="gender_wrap">
-            <span>성별*</span>
-            <radio-input
-                v-model={this.formData.gender}
-                items={this.radioList}
-                group="gender"
-                className={{input: 'screen-out', label: ''}}
-            />
-          </div>
-          <Birthday v-model={this.formData.birthday}/>
-          <PhoneNumberCertification v-model={this.formData.phoneNo} onCert={this.onCert}/>
-          <Agreement v-model={this.formData.agree}/>
-          <div class="btn-wrap">
-            <button type="button" class="btn btn-back" onClick={this.back}>취소</button>
-            <button type="button" class="btn btn-join" onClick={this.getData}>확인</button>
-          </div>
+              </validation-content>
+            </div>
+            <div class="gender_wrap">
+              <span>성별*</span>
+              <radio-input
+                  v-model={this.formData.gender}
+                  items={this.radioList}
+                  group="gender"
+                  className={{input: 'screen-out', label: ''}}
+              />
+            </div>
+            <Birthday v-model={this.formData.birthday}/>
+            <PhoneNumberCertification v-model={this.formData.phoneNo} onCert={this.onCert}/>
+            <Agreement v-model={this.formData.agree}/>
+            <div class="btn-wrap">
+              <button type="button" class="btn btn-back" onClick={this.back}>취소</button>
+              <button type="button" class="btn btn-join" onClick={this.getData}>확인</button>
+            </div>
+          </validation-wrap>
         </div>
     )
   }

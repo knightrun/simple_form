@@ -58,8 +58,8 @@
 }
 
 .error{
-    input{
-        border-color: #ef6600;
+    input, .select_wrap{
+        border-color: #ef6600 !important;
     }
 
     &-message{

@@ -69,10 +69,14 @@
 
             }
 
+            .phone-number_wrap{
+                position: relative;
+            }
+
             .btn-wrap{
                 position: absolute;
                 right: 0;
-                bottom: 0;
+                top: 10px;
                 width: 90px;
                 margin: 0;
 

@@ -3,7 +3,7 @@ import {Component, Vue, Prop} from 'nuxt-property-decorator'
 import {ValidationProvider} from "vee-validate";
 
 @Component
-export default class ValidationProviderWrap extends Vue {
+export default class ValidationContent extends Vue {
   $refs!: Vue['$refs'] & {
     provider: InstanceType<typeof ValidationProvider>
   }

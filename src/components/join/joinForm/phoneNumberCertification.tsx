@@ -36,38 +36,44 @@ export default class PhoneNumberCertification extends Vue {
     return (
         <div class="certification row">
           <span>휴대폰*</span>
-          <div class="phone-number_wrap">
-            <custom-select
-                id="nationNo"
-                ref="nationNo"
-                optionTitle="선택"
-                options={phoneData}
-                onInput={this.onInput}
-                v-model={this.nationNo}
-                disabled={this.certYn}
-            />
-            <text-input
-                type="tel"
-                id="phoneNo"
-                ref="phoneNo"
-                class="text_wrap"
-                className={{label: 'screen-out'}}
-                label="전화번호 입력"
-                placeholder="전화번호 입력"
-                onInput={this.onInput}
-                v-model={this.phoneNo}
-                disabled={this.certYn}
-            />
-          </div>
-          <div class="btn-wrap">
-            <button
-                type="button"
-                class={["btn btn-cert",{completed:this.certYn}]}
-                onClick={this.selfCert}
-                disabled={this.certYn}
-            >
-              {this.certYn ? '인증완료' : '인증'}
-            </button>
+          <div>
+            <validation-content rules="required" name="nationNo">
+              <custom-select
+                  id="nationNo"
+                  ref="nationNo"
+                  optionTitle="선택"
+                  options={phoneData}
+                  onInput={this.onInput}
+                  v-model={this.nationNo}
+                  disabled={this.certYn}
+              />
+            </validation-content>
+            <div class="phone-number_wrap">
+              <validation-content rules="required" name="phoneNo">
+                <text-input
+                  type="tel"
+                  id="phoneNo"
+                  ref="phoneNo"
+                  class="text_wrap"
+                  className={{label: 'screen-out'}}
+                  label="전화번호 입력"
+                  placeholder="전화번호 입력"
+                  onInput={this.onInput}
+                  v-model={this.phoneNo}
+                  disabled={this.certYn}
+                />
+              </validation-content>
+              <div class="btn-wrap">
+                <button
+                  type="button"
+                  class={["btn btn-cert", {completed: this.certYn}]}
+                  onClick={this.selfCert}
+                  disabled={this.certYn}
+                >
+                  {this.certYn ? '인증완료' : '인증'}
+                </button>
+              </div>
+            </div>
           </div>
         </div>
     )

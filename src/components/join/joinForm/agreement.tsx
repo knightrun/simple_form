@@ -10,13 +10,15 @@ export default class Agreement extends Vue {
   render(h: CreateElement): VNode {
     return (
         <div class="agree_wrap">
-          <span class="agree_txt">모든 약관 내용에 동의합니다.</span>
-          <checkbox-input
-              id="agree"
-              className={{input: 'screen-out', label: 'screen-out'}}
-              label="동의하기"
-              onInput={this.onInput}
-          />
+          <validation-content rules="requiredCheckBox" name="agree">
+            <span class="agree_txt">모든 약관 내용에 동의합니다.</span>
+            <checkbox-input
+                id="agree"
+                className={{input: 'screen-out', label: 'screen-out'}}
+                label="동의하기"
+                onInput={this.onInput}
+            />
+          </validation-content>
         </div>
     )
   }
