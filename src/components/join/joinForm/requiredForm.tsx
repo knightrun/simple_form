@@ -77,6 +77,7 @@ export default class RequiredForm extends Vue {
                     v-model={this.formData.userId}
                 />
               </validation-content>
+
               <validation-content rules="required" name="userPassword">
                 <text-input
                     id="userPassword"
@@ -98,9 +99,15 @@ export default class RequiredForm extends Vue {
                   className={{input: 'screen-out', label: ''}}
               />
             </div>
+
             <Birthday v-model={this.formData.birthday}/>
+
             <PhoneNumberCertification v-model={this.formData.phoneNo} onCert={this.onCert}/>
-            <Agreement v-model={this.formData.agree}/>
+
+            <validation-content rules="requiredCheckBox" name="agree">
+              <Agreement v-model={this.formData.agree}/>
+            </validation-content>
+
             <div class="btn-wrap">
               <button type="button" class="btn btn-back" onClick={this.back}>취소</button>
               <button type="button" class="btn btn-join" onClick={this.getData}>확인</button>

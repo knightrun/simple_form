@@ -14,11 +14,11 @@ for (let [rule, validation] of Object.entries(rules)) {
   }
 }
 
-// extend('even', value => {
-//   return value % 2 === 0;
-// });
-
-extend('requiredCheckBox', value => {
-  console.log('checked : ', value)
-  return value;
+extend('odd', value => {
+  return value % 2 !== 0;
 });
+
+extend('requiredCheckBox', {
+  validate: value => value,
+  message: '필수체크 입니다.'
+})
