@@ -11,13 +11,16 @@ export default class ValidationWrap extends Vue {
   @Prop({type: String, default: "observer"})
   name: string
 
-  onSubmit() {
-    this.$refs.observer.validate()
+  @Prop({type: String, default: "div"})
+  tag: string
+
+  async onSubmit() {
+    return await this.$refs.observer.validate()
   }
 
   render(h: CreateElement): VNode {
     return (
-        <ValidationObserver ref={this.name}>
+        <ValidationObserver tag={this.tag} ref={this.name}>
           {
             (observerScope: any) => (
                 <div class="validation-provider">

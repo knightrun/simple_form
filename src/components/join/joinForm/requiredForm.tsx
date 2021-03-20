@@ -45,6 +45,11 @@ export default class RequiredForm extends Vue {
 
   async getData() {
     const valid = await this.$refs.validationWrap.onSubmit()
+
+    if(valid){
+      this.$emit('sendData', this.formData)
+    }
+
     // if (this.formData.userId === '') {
     //   alert('아이디를 입력해 주세요.')
     //   return false
@@ -58,10 +63,9 @@ export default class RequiredForm extends Vue {
     //   alert('약관 내용에 동의해 주세요.')
     //   return false
     // }
-    //
-    // this.$emit('sendData', this.formData)
   }
 
+  //ValidationProvider rules는 v-model과 연결
   render(h: CreateElement): VNode {
     return (
         <div class="form_wrap">
